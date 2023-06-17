@@ -34,14 +34,6 @@ const typeDefs = gql`
     user: User
   }
 
-  input SaveBookInput {
-    authors: [String]
-    description: String
-    title: String
-    bookId: String
-    image: String
-    link: String
-  }
 `;
 
 module.exports = typeDefs;
