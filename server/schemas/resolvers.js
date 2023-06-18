@@ -16,21 +16,15 @@ const resolvers = {
     addUser: async (parent, args) => {
       try {
         const user = await User.create(args);
-
-        if (!user) {
-          throw new AuthenticationError("Something is wrong!");
-        }
-
         const token = signToken(user);
-
         return { token, user };
       } catch (error) {
         throw new AuthenticationError(error.message);
       }
     },
-    login: async (parent, args) => {
+  login: async (parent, { email, password }) => {
       try {
-        const { email, password } = args;
+        
         const user = await User.findOne({ email });
 
         if (!user) {
