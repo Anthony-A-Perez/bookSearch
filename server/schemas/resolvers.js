@@ -47,7 +47,7 @@ const resolvers = {
     saveBook: async (parent, { newBook }, context) => {
       try {
         if (context.user) {
-          const updatedUser = await User.findOneAndUpdate(
+          const updatedUser = await User.findByIdAndUpdate(
             { _id: context.user._id },
             { $push: { savedBooks: newBook } },
             { new: true }
@@ -56,7 +56,7 @@ const resolvers = {
           return updatedUser;
         }
       } catch (error) {
-        throw new AuthenticationError(error.message);
+        throw new AuthenticationError('you need to be logged in');
       }
     },
     removeBook: async (parent, { bookId }, context) => {
